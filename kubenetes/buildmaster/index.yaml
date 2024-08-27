@@ -3,7 +3,7 @@ entries:
   buildmaster:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-08-27T12:51:29.2278662-04:00"
+    created: "2024-08-27T13:14:07.9349791-04:00"
     description: A Helm chart for Kubernetes
     digest: 57ba225f0a483fbe60d3133ab51222fc268dee82275d898eee047714cd0e605d
     name: buildmaster
@@ -11,4 +11,4 @@ entries:
     urls:
     - https://chejuro1.github.io/BuildMaster/kubernetes/buildmaster/buildmaster-0.1.0.tgz
     version: 0.1.0
-generated: "2024-08-27T12:51:29.2261935-04:00"
+generated: "2024-08-27T13:14:07.933925-04:00"
