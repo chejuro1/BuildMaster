@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inedo-config-proget
+data:
+  PROGET_SQL_CONNECTION_STRING: "Data Source=inedo-sql; Initial Catalog=ProGet; User ID=sa; Password='Jpo45l..2020'"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inedo-config-buildmaster
+data:
+  BUILDMASTER_SQL_CONNECTION_STRING: "Data Source=inedo-sql; Initial Catalog=BuildMaster; User ID=sa; Password='Jpo45l..2020'"
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: inedo-config-otter
+data:
+  OTTER_SQL_CONNECTION_STRING: "Data Source=inedo-sql; Initial Catalog=otter; User ID=sa; Password='Jpo45l..2020'"

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buildmaster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buildmaster
+  template:
+    metadata:
+      labels:
+        app: buildmaster
+    spec:
+      containers:
+      - name: buildmaster
+        image: proget.inedo.com/productimages/inedo/buildmaster:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: BuildMaster_SQL_CONNECTION_STRING
+          valueFrom:
+            configMapKeyRef:
+              name: inedo-config-buildmaster
+              key: BUILDMASTER_SQL_CONNECTION_STRING
+        volumeMounts:
+        - name: buildmaster-artifacts
+          mountPath: /var/buildmaster/artifacts
+      volumes:
+      - name: buildmaster-artifacts
+        persistentVolumeClaim:
+          claimName: buildmaster-artifacts-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: buildmaster
+spec:
+  selector:
+    app: buildmaster
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

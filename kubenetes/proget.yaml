@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proget
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proget
+  template:
+    metadata:
+      labels:
+        app: proget
+    spec:
+      containers:
+      - name: proget
+        image: proget.inedo.com/productimages/inedo/proget:5.3
+        ports:
+        - containerPort: 80
+        env:
+        - name: PROGET_SQL_CONNECTION_STRING
+          valueFrom:
+            configMapKeyRef:
+              name: inedo-config-proget
+              key: PROGET_SQL_CONNECTION_STRING
+
+        volumeMounts:
+        - name: proget-packages
+          mountPath: /var/proget/packages
+      volumes:
+      - name: proget-packages
+        persistentVolumeClaim:
+          claimName: proget-packages-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: proget
+spec:
+  selector:
+    app: proget
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
